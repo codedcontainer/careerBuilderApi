@@ -35,7 +35,6 @@ for ($i = 0; $i <= $count; $i++)
   $html = "<h2 id='jobTitle'><a href='".$jobDetailUrl."'>".$jobTitle."</a></h2>";
   $html .= "<span id='date'>Posted Date: ".$postedDate."</span>";
 
- 
    //get the job description
   $curl2 = curl_init();
   curl_setopt($curl2, CURLOPT_URL, $jobServiceUrl);
@@ -47,22 +46,15 @@ for ($i = 0; $i <= $count; $i++)
 
   $xml2 = simplexml_load_string($curl_response2); 
 
-  $jobDescription = strip_tags(html_entity_decode($xml2->Job->JobDescription));
+  $jobDescription = strip_tags(html_entity_decode($xml2->Job->JobRequirements));
   //change the number of words to display
   $string = $jobDescription;
 
-if (strlen($string) > 200) {
-
+if (strlen($string) > 300) {
     // truncate string
-    $stringCut = substr($string, 0, 200);
-
+    $stringCut = substr($string, 0, 300);
 }
   $html .= "<p id='jobDescription'>".$stringCut."<a href='".$jobDetailUrl."''> Read More..</a>"."</p>";
   echo $html;
 }
-
-    
-
 ?>
-
-
